@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Tutorial
+from .models import Tutorial, TutorialCategory, TutorialSeries
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from .forms import NewUserForm
 
 # Create your views here.
+def single_slug(request, single_slug):
+	categories = [c.category_slug for c in TutorialCategory.objects.all() ]
+	if single_slug in categories:
+		return HttpResponse(f"{single_slug} is a category!!!")
 
 def homepage(request):
 	return render(request=request,

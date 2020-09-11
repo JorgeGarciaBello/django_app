@@ -15,17 +15,23 @@ class TutorialCategory(models.Model):
 
 class TutorialSeries(models.Model):
 	tutorial_series = models.CharField(max_length=200)
-	tutorial_description = models.CharField(max_length=200)
-	tutorial_type = models.CharField(max_length=200)
+	tutorial_categoty = models.ForeignKey(TutorialCategory, default=1,verbose_name="Category", on_delete=models.SET_DEFAULT)
+	series_summary = models.CharField(max_length=200)
 
+	class Meta:
+		verbose_name_plural = "Series"
 
-
+	def _str_(self):
+		return self.tutorial_series
 
 # Create your models here.
 class Tutorial(models.Model):
 	tutorial_title = models.CharField(max_length=200)
 	tutorial_content = models.TextField()
 	tutorial_published = models.DateTimeField("date published", default=timezone.now())
+
+	tutorial_series = models.ForeignKey(TutorialSeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
+	tutorial_slug = models.CharField(max_length=200, default=1)
 
 	def __str__(self):
 		return self.tutorial_title
