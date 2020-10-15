@@ -15,7 +15,7 @@ class TutorialCategory(models.Model):
 
 class TutorialSeries(models.Model):
 	tutorial_series = models.CharField(max_length=200)
-	tutorial_categoty = models.ForeignKey(TutorialCategory, default=1,verbose_name="Category", on_delete=models.SET_DEFAULT)
+	tutorial_category = models.ForeignKey(TutorialCategory, default=1,verbose_name="Category", on_delete=models.SET_DEFAULT)
 	series_summary = models.CharField(max_length=200)
 
 	class Meta:
